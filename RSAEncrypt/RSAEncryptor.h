@@ -5,7 +5,6 @@
 //  Created by PacteraLF on 16/10/17.
 //  Copyright © 2016年 PacteraLF. All rights reserved.
 // RSA加密封装类
-//注意：如果使用，需要打开钥匙串；因为iOS不支持直接使用字符串格式的公钥进行加密，转换为文件后可使用
 
 #import <Foundation/Foundation.h>
 
