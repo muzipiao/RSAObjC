@@ -1,0 +1,16 @@
+PODS:
+  - RSAObjC (0.1.1)
+
+DEPENDENCIES:
+  - RSAObjC (from `../`)
+
+EXTERNAL SOURCES:
+  RSAObjC:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  RSAObjC: d3ceeba33a8265bf7c640694a81e6d207f6ada29
+
+PODFILE CHECKSUM: 56b8a73242ebecafe8c0b3bf93f9dfd3a5cc49a9
+
+COCOAPODS: 1.7.5

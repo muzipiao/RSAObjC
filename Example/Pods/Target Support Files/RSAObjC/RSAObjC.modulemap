@@ -1,0 +1,6 @@
+framework module RSAObjC {
+  umbrella header "RSAObjC-umbrella.h"
+
+  export *
+  module * { export * }
+}
