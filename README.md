@@ -69,11 +69,11 @@ RSA 加密在 iOS 中经常用到，麻烦的方法是使用 openssl 生成所�
 
 ```sequence
 iPhone->Server: 客户端向服务请求 RSA 公钥
-Note right of Server: 服务端保留 RSA 私钥
+Server: 服务端保留 RSA 私钥
 Server-->iPhone: 服务端将 RSA 公钥发送给客户端
-Note left of iPhone: 客户端使用 RSA 公钥加密密码
+iPhone: 客户端使用 RSA 公钥加密密码
 iPhone->Server: 客户端将加密后的密文发送给服务器
-Note right of Server: 服务端使用 RSA 私钥解密校验密码
+Server: 服务端使用 RSA 私钥解密校验密码
 Server-->iPhone: 服务端将密码校验结果发送给客户端
 ```
 
@@ -81,11 +81,13 @@ Server-->iPhone: 服务端将密码校验结果发送给客户端
 
 这是一串服务器生成的 RSA 公钥，可以看到由z数字字母及 `+/` 组成。
 
-        MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDTbZ6cNH9
-        PgdF60aQKveLz3FTalyzHQwbp601y77SzmGHX3F5NoVUZbd
-        K7UMdoCLK4FBziTewYD9DWvAErXZo9BFuI96bAop8wfl1Vk
-        ZyyHTcznxNJFGSQd/B70/ExMgMBpEwkAAdyUqIjIdVGh1FQ
-        K/4acwS39YXwbS+IlHsPSQIDAQAB
+```
+MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDTbZ6cNH9
+PgdF60aQKveLz3FTalyzHQwbp601y77SzmGHX3F5NoVUZbd
+K7UMdoCLK4FBziTewYD9DWvAErXZo9BFuI96bAop8wfl1Vk
+ZyyHTcznxNJFGSQd/B70/ExMgMBpEwkAAdyUqIjIdVGh1FQ
+K/4acwS39YXwbS+IlHsPSQIDAQAB
+```
 
 由于含有`/+=\n`等特殊字符串，网络传输过程中导致转义，进而导致加解密不成功，解决办法是进行 URL 特殊符号编码解码（百分号转义），如下所示，将除字母数字外，全部进行 URLEncode 编码。
 
@@ -102,10 +104,12 @@ NSString *decodePubKey = encodePubKey.stringByRemovingPercentEncoding;
 
 编码后如下所示，除了字母数字外，其他符号都变成了 URLEncode 形式，解码后和原文相同。
 
-        MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDTbZ6cNH9
-        PgdF60aQKveLz3FTalyzHQwbp601y77SzmGHX3F5NoVUZbdK7U
-        MdoCLK4FBziTewYD9DWvAErXZo9BFuI96bAop8wfl1VkZyyHTczn
-        xNJFGSQd%2FB70%2FExMgMBpEwkAAdyUqIjIdVGh1FQK%2F4
-        acwS39YXwbS%2BIlHsPSQIDAQAB
+```
+MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDTbZ6cNH9
+PgdF60aQKveLz3FTalyzHQwbp601y77SzmGHX3F5NoVUZbdK7U
+MdoCLK4FBziTewYD9DWvAErXZo9BFuI96bAop8wfl1VkZyyHTczn
+xNJFGSQd%2FB70%2FExMgMBpEwkAAdyUqIjIdVGh1FQK%2F4
+acwS39YXwbS%2BIlHsPSQIDAQAB
+```
 
 如果您觉得有所帮助，请在 [GitHub RSAObjC](https://github.com/muzipiao/RSAObjC) 上赏个Star ⭐️，您的鼓励是我前进的动力

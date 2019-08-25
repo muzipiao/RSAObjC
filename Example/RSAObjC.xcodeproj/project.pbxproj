@@ -21,6 +21,18 @@
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		914BF1982157DDF3A0C170F2 /* Pods_RSAObjC_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6C577131E32C50D5CE59E76 /* Pods_RSAObjC_Example.framework */; };
 		AB2FEDFF23104E3F00282D94 /* RSATests.m in Sources */ = {isa = PBXBuildFile; fileRef = AB2FEDFD23104E3200282D94 /* RSATests.m */; };
+		ABE2A0F02312DCD500914299 /* rsa_1024_public_key.pem in Resources */ = {isa = PBXBuildFile; fileRef = ABE2A0EC2312DCD500914299 /* rsa_1024_public_key.pem */; };
+		ABE2A0F12312DCD500914299 /* rsa_2048_public_key.pem in Resources */ = {isa = PBXBuildFile; fileRef = ABE2A0ED2312DCD500914299 /* rsa_2048_public_key.pem */; };
+		ABE2A0F52312DCEF00914299 /* rsa_1024_public_key.pem in Resources */ = {isa = PBXBuildFile; fileRef = ABE2A0EC2312DCD500914299 /* rsa_1024_public_key.pem */; };
+		ABE2A0F62312DCF200914299 /* rsa_2048_public_key.pem in Resources */ = {isa = PBXBuildFile; fileRef = ABE2A0ED2312DCD500914299 /* rsa_2048_public_key.pem */; };
+		ABE2A0F92312EF5000914299 /* rsa_1024_public_key.der in Resources */ = {isa = PBXBuildFile; fileRef = ABE2A0F72312EF5000914299 /* rsa_1024_public_key.der */; };
+		ABE2A0FA2312EF5000914299 /* rsa_1024_public_key.der in Resources */ = {isa = PBXBuildFile; fileRef = ABE2A0F72312EF5000914299 /* rsa_1024_public_key.der */; };
+		ABE2A0FB2312EF5000914299 /* rsa_1024_private_key.p12 in Resources */ = {isa = PBXBuildFile; fileRef = ABE2A0F82312EF5000914299 /* rsa_1024_private_key.p12 */; };
+		ABE2A0FC2312EF5000914299 /* rsa_1024_private_key.p12 in Resources */ = {isa = PBXBuildFile; fileRef = ABE2A0F82312EF5000914299 /* rsa_1024_private_key.p12 */; };
+		ABE2A1042313009700914299 /* rsa_2048_private_key_pkcs8.pem in Resources */ = {isa = PBXBuildFile; fileRef = ABE2A1032313009700914299 /* rsa_2048_private_key_pkcs8.pem */; };
+		ABE2A1052313009700914299 /* rsa_2048_private_key_pkcs8.pem in Resources */ = {isa = PBXBuildFile; fileRef = ABE2A1032313009700914299 /* rsa_2048_private_key_pkcs8.pem */; };
+		ABE2A1072313020000914299 /* rsa_1024_private_key_pkcs8.pem in Resources */ = {isa = PBXBuildFile; fileRef = ABE2A1062313020000914299 /* rsa_1024_private_key_pkcs8.pem */; };
+		ABE2A1082313020000914299 /* rsa_1024_private_key_pkcs8.pem in Resources */ = {isa = PBXBuildFile; fileRef = ABE2A1062313020000914299 /* rsa_1024_private_key_pkcs8.pem */; };
 		E9DE66C43E74E3C2C838A2A4 /* Pods_RSAObjC_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20E0AA610F10EA04383E0984 /* Pods_RSAObjC_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +73,12 @@
 		A551A83277E4594CF6AC0CCB /* Pods-RSAObjC_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RSAObjC_Tests.debug.xcconfig"; path = "Target Support Files/Pods-RSAObjC_Tests/Pods-RSAObjC_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		A6C577131E32C50D5CE59E76 /* Pods_RSAObjC_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RSAObjC_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB2FEDFD23104E3200282D94 /* RSATests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSATests.m; sourceTree = "<group>"; };
+		ABE2A0EC2312DCD500914299 /* rsa_1024_public_key.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rsa_1024_public_key.pem; sourceTree = "<group>"; };
+		ABE2A0ED2312DCD500914299 /* rsa_2048_public_key.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rsa_2048_public_key.pem; sourceTree = "<group>"; };
+		ABE2A0F72312EF5000914299 /* rsa_1024_public_key.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = rsa_1024_public_key.der; sourceTree = "<group>"; };
+		ABE2A0F82312EF5000914299 /* rsa_1024_private_key.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = rsa_1024_private_key.p12; sourceTree = "<group>"; };
+		ABE2A1032313009700914299 /* rsa_2048_private_key_pkcs8.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rsa_2048_private_key_pkcs8.pem; sourceTree = "<group>"; };
+		ABE2A1062313020000914299 /* rsa_1024_private_key_pkcs8.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rsa_1024_private_key_pkcs8.pem; sourceTree = "<group>"; };
 		E25209936A319582C1DF38A1 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		E5D759C70D3AB5AF90504C87 /* RSAObjC.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = RSAObjC.podspec; path = ../RSAObjC.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 /* End PBXFileReference section */
@@ -128,6 +146,7 @@
 		6003F593195388D20070C39A /* Example for RSAObjC */ = {
 			isa = PBXGroup;
 			children = (
+				ABE2A0E92312DCD500914299 /* PemFiles */,
 				6003F59C195388D20070C39A /* RSAAppDelegate.h */,
 				6003F59D195388D20070C39A /* RSAAppDelegate.m */,
 				6003F5A5195388D20070C39A /* RSAViewController.h */,
@@ -177,6 +196,19 @@
 				E25209936A319582C1DF38A1 /* LICENSE */,
 			);
 			name = "Podspec Metadata";
+			sourceTree = "<group>";
+		};
+		ABE2A0E92312DCD500914299 /* PemFiles */ = {
+			isa = PBXGroup;
+			children = (
+				ABE2A0F82312EF5000914299 /* rsa_1024_private_key.p12 */,
+				ABE2A0F72312EF5000914299 /* rsa_1024_public_key.der */,
+				ABE2A0EC2312DCD500914299 /* rsa_1024_public_key.pem */,
+				ABE2A1062313020000914299 /* rsa_1024_private_key_pkcs8.pem */,
+				ABE2A0ED2312DCD500914299 /* rsa_2048_public_key.pem */,
+				ABE2A1032313009700914299 /* rsa_2048_private_key_pkcs8.pem */,
+			);
+			path = PemFiles;
 			sourceTree = "<group>";
 		};
 		AC4618739EE207D680531D64 /* Pods */ = {
@@ -275,8 +307,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABE2A0F92312EF5000914299 /* rsa_1024_public_key.der in Resources */,
+				ABE2A0F02312DCD500914299 /* rsa_1024_public_key.pem in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
+				ABE2A1042313009700914299 /* rsa_2048_private_key_pkcs8.pem in Resources */,
+				ABE2A1072313020000914299 /* rsa_1024_private_key_pkcs8.pem in Resources */,
+				ABE2A0F12312DCD500914299 /* rsa_2048_public_key.pem in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
+				ABE2A0FB2312EF5000914299 /* rsa_1024_private_key.p12 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,7 +322,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABE2A1052313009700914299 /* rsa_2048_private_key_pkcs8.pem in Resources */,
+				ABE2A0F62312DCF200914299 /* rsa_2048_public_key.pem in Resources */,
+				ABE2A0F52312DCEF00914299 /* rsa_1024_public_key.pem in Resources */,
+				ABE2A0FA2312EF5000914299 /* rsa_1024_public_key.der in Resources */,
 				6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */,
+				ABE2A1082313020000914299 /* rsa_1024_private_key_pkcs8.pem in Resources */,
+				ABE2A0FC2312EF5000914299 /* rsa_1024_private_key.p12 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

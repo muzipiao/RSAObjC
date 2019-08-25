@@ -19,15 +19,15 @@
 + (NSString *)encrypt:(NSString *)plaintext PublicKey:(NSString *)pubKey;
 
 /**
- * -------RSA Der 文件公钥加密-------
+ * -------RSA 公钥文件加密-------
  @param plaintext 明文，待加密的字符串
- @param path .der 格式的公钥文件路径
+ @param path 公钥文件路径，p12或pem格式
  @return 密文，加密后的字符串
  */
-+ (NSString *)encrypt:(NSString *)plaintext DerFilePath:(NSString *)path;
++ (NSString *)encrypt:(NSString *)plaintext KeyFilePath:(NSString *)path;
 
 /**
- * -------RSA 字符串私钥解密-------
+ * -------RSA 私钥字符串解密-------
  @param ciphertext 密文，需要解密的字符串
  @param privKey 私钥字符串
  @return 明文，解密后的字符串
@@ -35,13 +35,13 @@
 + (NSString *)decrypt:(NSString *)ciphertext PrivateKey:(NSString *)privKey;
 
 /**
- * -------RSA Der 文件私钥解密-------
+ * -------RSA 私钥文件解密-------
  @param ciphertext 密文，需要解密的字符串
- @param path .der 格式的私钥文件路径
+ @param path 私钥文件路径，p12或pem格式(pem私钥需为pcks8格式)
  @param pwd 私钥文件的密码
  @return 明文，解密后的字符串
  */
-+ (NSString *)decrypt:(NSString *)ciphertext DerFilePath:(NSString *)path DerPwd:(NSString *)pwd;
++ (NSString *)decrypt:(NSString *)ciphertext KeyFilePath:(NSString *)path FilePwd:(NSString *)pwd;
 
 
 @end

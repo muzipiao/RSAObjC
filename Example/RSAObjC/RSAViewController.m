@@ -42,6 +42,30 @@
     NSMutableString *mStr = [NSMutableString stringWithString:self.gTextView.text];
     [mStr appendFormat:@"\nRSA公钥：\n%@\nRSA私钥：\n%@\nRSA加密密文：\n%@\nRSA解密结果：\n%@", self.gPubkey, self.gPrikey, encryptStr, decryptStr];
     self.gTextView.text = mStr;
+    
+    // 测试 der p12 标准文件格式秘钥加解密
+    NSString *derPubKeyPath = [[NSBundle mainBundle] pathForResource:@"rsa_1024_public_key.der" ofType:nil];
+    NSString *p12PrivKeyPath = [[NSBundle mainBundle] pathForResource:@"rsa_1024_private_key.p12" ofType:nil];
+    NSString *enWithDer = [RSAObjC encrypt:self.gPwd KeyFilePath:derPubKeyPath];
+    NSLog(@"1024 位 Der 格式公钥加密结果：\n%@", enWithDer);
+    NSString *deWithP12 = [RSAObjC decrypt:enWithDer KeyFilePath:p12PrivKeyPath FilePwd:nil];
+    NSLog(@"1024 位 p12 格式私钥解密结果：\n%@", deWithP12);
+    /**
+     * 测试 PEM 文本文件格式秘钥加解密，若pem私钥不是 pkcs8 格式，需要转为 pks8 格式
+     * openssl pkcs8 -topk8 -inform PEM -in rsa_private_key.pem -outform PEM -nocrypt > rsa_private_key_pkcs8.pem
+     */
+    NSString *g1024PubKeyPath = [[NSBundle mainBundle] pathForResource:@"rsa_1024_public_key.pem" ofType:nil];
+    NSString *g1024PrivKeyPath = [[NSBundle mainBundle] pathForResource:@"rsa_1024_private_key_pkcs8.pem" ofType:nil];
+    NSString *g2048PubKeyPath = [[NSBundle mainBundle] pathForResource:@"rsa_2048_public_key.pem" ofType:nil];
+    NSString *g2048PrivKeyPath = [[NSBundle mainBundle] pathForResource:@"rsa_2048_private_key_pkcs8.pem" ofType:nil];
+    NSString *enWith1024Key = [RSAObjC encrypt:self.gPwd KeyFilePath:g1024PubKeyPath];
+    NSLog(@"1024 位 PEM 格式公钥加密结果：\n%@", enWith1024Key);
+    NSString *deWith1024Key = [RSAObjC decrypt:enWith1024Key KeyFilePath:g1024PrivKeyPath FilePwd:nil];
+    NSLog(@"1024 位 PEM 格式私钥解密结果：\n%@", deWith1024Key);
+    NSString *enWith2048Key = [RSAObjC encrypt:self.gPwd KeyFilePath:g2048PubKeyPath];
+    NSLog(@"2048 位 PEM 格式公钥加密结果：\n%@", enWith2048Key);
+    NSString *deWith2048Key = [RSAObjC decrypt:enWith2048Key KeyFilePath:g2048PrivKeyPath FilePwd:nil];
+    NSLog(@"2048 位 PEM 格式私钥解密结果：\n%@", deWith2048Key);
 }
 
 - (void)initValues{

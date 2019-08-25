@@ -29,22 +29,33 @@ static NSData *base64_decode(NSString *str){
  @return 密文，加密后的字符串
  */
 + (NSString *)encrypt:(NSString *)plaintext PublicKey:(NSString *)pubKey{
+    if (plaintext.length == 0 || pubKey.length == 0) {
+        return nil;
+    }
     NSData *data = [self encryptData:[plaintext dataUsingEncoding:NSUTF8StringEncoding] publicKey:pubKey];
     NSString *ret = base64_encode_data(data);
     return ret;
 }
 
 /**
- * -------RSA Der公钥加密-------
+ * -------RSA 公钥文件加密-------
  @param plaintext 明文，待加密的字符串
- @param path .der 格式的公钥文件路径
+ @param path 公钥文件路径，p12或pem格式
  @return 密文，加密后的字符串
  */
-+ (NSString *)encrypt:(NSString *)plaintext DerFilePath:(NSString *)path{
++ (NSString *)encrypt:(NSString *)plaintext KeyFilePath:(NSString *)path{
     if (plaintext.length == 0 || path.length == 0) {
         return nil;
     }
-    return [self encryptString:plaintext publicKeyRef:[self getPublicKeyRefWithContentsOfFile:path]];
+    NSString *result = nil;
+    if ([path hasSuffix:@".pem"]) {
+        NSString *pubKey = [self readPubKeyFromPem:path];
+        NSData *data = [self encryptData:[plaintext dataUsingEncoding:NSUTF8StringEncoding] publicKey:pubKey];
+        result = base64_encode_data(data);
+    }else{
+        result = [self encryptString:plaintext publicKeyRef:[self getPublicKeyRefWithContentsOfFile:path]];
+    }
+    return result;
 }
 
 /**
@@ -65,18 +76,64 @@ static NSData *base64_decode(NSString *str){
 }
 
 /**
- * -------RSA Der私钥解密-------
+ * -------RSA 私钥文件解密-------
  @param ciphertext 密文，需要解密的字符串
- @param path .der 格式的私钥文件路径
+ @param path 私钥文件路径，p12或pem格式(pem私钥需为pcks8格式)
  @param pwd 私钥文件的密码
  @return 明文，解密后的字符串
  */
-+ (NSString *)decrypt:(NSString *)ciphertext DerFilePath:(NSString *)path DerPwd:(NSString *)pwd{
++ (NSString *)decrypt:(NSString *)ciphertext KeyFilePath:(NSString *)path FilePwd:(NSString *)pwd{
     if (ciphertext.length == 0 || path.length == 0) {
         return nil;
     }
     if (!pwd) pwd = @"";
-    return [self decryptString:ciphertext privateKeyRef:[self getPrivateKeyRefWithContentsOfFile:path password:pwd]];
+    
+    NSString *result = nil;
+    if ([path hasSuffix:@".pem"]) {
+        NSString *privKey = [self readPrivKeyFromPem:path];
+        NSData *data = [[NSData alloc] initWithBase64EncodedString:ciphertext options:NSDataBase64DecodingIgnoreUnknownCharacters];
+        data = [self decryptData:data privateKey:privKey];
+        result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    }else{
+        result = [self decryptString:ciphertext privateKeyRef:[self getPrivateKeyRefWithContentsOfFile:path password:pwd]];
+    }
+    return result;
+}
+
++ (NSString *)readPubKeyFromPem:(NSString *)filePath{
+    NSString *pemStr = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+    if (pemStr.length == 0) {
+        return nil;
+    }
+    NSString *header = @"-----BEGIN PUBLIC KEY-----";
+    NSString *footer = @"-----END PUBLIC KEY-----";
+    pemStr = [pemStr stringByReplacingOccurrencesOfString:header withString:@""];
+    pemStr = [pemStr stringByReplacingOccurrencesOfString:footer withString:@""];
+    pemStr = [pemStr stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+    pemStr = [pemStr stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    pemStr = [pemStr stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+    pemStr = [pemStr stringByReplacingOccurrencesOfString:@" " withString:@""];
+    return pemStr;
+}
+
++ (NSString *)readPrivKeyFromPem:(NSString *)filePath{
+    NSString *pemStr = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+    if (pemStr.length == 0) {
+        return nil;
+    }
+    NSString *header = @"-----BEGIN RSA PRIVATE KEY-----";
+    NSString *footer = @"-----END RSA PRIVATE KEY-----";
+    NSString *header_pkcs8 = @"-----BEGIN PRIVATE KEY-----";
+    NSString *footer_pkcs8 = @"-----END PRIVATE KEY-----";
+    pemStr = [pemStr stringByReplacingOccurrencesOfString:header withString:@""];
+    pemStr = [pemStr stringByReplacingOccurrencesOfString:footer withString:@""];
+    pemStr = [pemStr stringByReplacingOccurrencesOfString:header_pkcs8 withString:@""];
+    pemStr = [pemStr stringByReplacingOccurrencesOfString:footer_pkcs8 withString:@""];
+    pemStr = [pemStr stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+    pemStr = [pemStr stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    pemStr = [pemStr stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+    pemStr = [pemStr stringByReplacingOccurrencesOfString:@" " withString:@""];
+    return pemStr;
 }
 
 + (SecKeyRef)getPublicKeyRefWithContentsOfFile:(NSString *)filePath{
