@@ -3,7 +3,7 @@ This application makes use of the following third party libraries:
 
 ## RSAObjC
 
-Copyright (c) 2019 李飞 <test1234@126.com>
+Copyright (c) 2019 李飞 <lifei_zdjl@126.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

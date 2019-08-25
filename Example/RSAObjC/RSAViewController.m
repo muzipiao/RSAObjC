@@ -14,7 +14,7 @@
 @property (nonatomic, copy) NSString *gPwd;
 @property (nonatomic, copy) NSString *gPubkey; // 公钥
 @property (nonatomic, copy) NSString *gPrikey; // 私钥
-@property (nonatomic, strong) UITextView *gTextView;
+@property (nonatomic, strong) UITextView *gTextView; // 显示
 
 @end
 
@@ -30,20 +30,19 @@
     [self.view addSubview:self.gTextView];
     self.gPwd = @"123456";  // 测试用密码
     [self initValues]; // 初始化公私钥
-    [self testRSA];    // 测试 RSA 加解密
+    [self testRSAEncrypt];    // 测试 RSA 加解密
 }
 
-- (void)testRSA{
+- (void)testRSAEncrypt{
     // RSA 加密
     NSString *encryptStr = [RSAObjC encrypt:self.gPwd PublicKey:self.gPubkey];
     // RSA 解密
     NSString *decryptStr = [RSAObjC decrypt:encryptStr PrivateKey:self.gPrikey];
     
     NSMutableString *mStr = [NSMutableString stringWithString:self.gTextView.text];
-    [mStr appendFormat:@"\nRSA加密密文：\n%@\nRSA解密结果：\n%@", encryptStr, decryptStr];
+    [mStr appendFormat:@"\nRSA公钥：\n%@\nRSA私钥：\n%@\nRSA加密密文：\n%@\nRSA解密结果：\n%@", self.gPubkey, self.gPrikey, encryptStr, decryptStr];
     self.gTextView.text = mStr;
 }
-
 
 - (void)initValues{
     /*
@@ -60,48 +59,20 @@
     //----------------URL编码解码，解决特殊符号问题----------------
     // 服务器传输过来的公钥字符串可能是这样的
     NSString *RSAPublickKeyFromServer = @"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDTbZ6cNH9PgdF60aQKveLz3FTalyzHQwbp601y77SzmGHX3F5NoVUZbdK7UMdoCLK4FBziTewYD9DWvAErXZo9BFuI96bAop8wfl1VkZyyHTcznxNJFGSQd%2FB70%2FExMgMBpEwkAAdyUqIjIdVGh1FQK%2F4acwS39YXwbS%2BIlHsPSQIDAQAB";
-    // RSAPublickKeyFromServer 解码后应该和 gPubkey 相同
-    NSString *urlDecodePublicKey = [self urlDecode:RSAPublickKeyFromServer];
+    // RSAPublickKeyFromServer URLDecode解码后应该和 gPubkey 相同
+    NSString *urlDecodePublicKey = RSAPublickKeyFromServer.stringByRemovingPercentEncoding;
     if ([urlDecodePublicKey isEqualToString:self.gPubkey]) {
         NSLog(@"解码后和标准公钥一致");
     }else{
         NSLog(@"解码后和标准公钥不一致");
     }
-    //测试一下编码
-    NSString *urlEncodePublicKey = [self urlEncode:self.gPubkey Set:@"/+=\n"];
+    // URLEncode，除数字字母外的符号都进行 URLEncode
+    NSString *urlEncodePublicKey = [self.gPubkey stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.alphanumericCharacterSet];
     if ([urlEncodePublicKey isEqualToString:RSAPublickKeyFromServer]) {
         NSLog(@"编码后和服务器传过来的一致");
     }else{
         NSLog(@"编码后和服务器传过来的不一致");
     }
-}
-
-/**
- * url编码
- @param originalText 原文
- @param charSet 需要转义的特殊字符，例如@"/+=\n"
- @return 特殊字符编码后的字符串
- */
--(NSString *)urlEncode:(NSString *)originalText Set:(NSString *)charSet{
-    if(originalText.length == 0){
-        return @"";
-    }
-    //设置需要转义的特殊字符，例如@"/+=\n"
-    NSCharacterSet *characterSet = [[NSCharacterSet characterSetWithCharactersInString:charSet] invertedSet];
-    //返回转义后的字符串
-    return [originalText stringByAddingPercentEncodingWithAllowedCharacters:characterSet];
-}
-
-/**
- * url解码
- @param encodeStr URLEncode的字符串
- @return 解码后字符串
- */
--(NSString *)urlDecode:(NSString *)encodeStr{
-    if(encodeStr.length == 0){
-        return @"";
-    }
-    return encodeStr.stringByRemovingPercentEncoding;
 }
 
 @end

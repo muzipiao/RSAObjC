@@ -55,24 +55,57 @@ NSLog(@"解密后:%@",decryptStr);
 
 ## 其他
 
-RSA加密在iOS中经常用到，麻烦的方法是使用openssl生成所需秘钥文件，需要用到.der和.p12后缀格式的文件，其中.der格式的文件存放的是公钥（Public key）用于加密，.p12格式的文件存放的是私钥（Private key）用于解密。至于公钥和私钥的关系，有人形象的把公钥比喻为保险箱，把私钥比喻为保险箱的钥匙，保险箱我可以给任何人，也可以有多个保险箱，任何人都可以往保险箱里面放东西(机密数据)，但只有我有私钥(保险箱的钥匙)，只有我能打开保险箱。
+RSA 加密在 iOS 中经常用到，麻烦的方法是使用 openssl 生成所需秘钥文件，需要用到 .der 和 .p12 后缀格式的文件，其中 .der 格式的文件存放的是公钥（Public key）用于加密，.p12 格式的文件存放的是私钥（Private key）用于解密。
 
-### 常见使用场景(客户端加密`用户密码/交易密码`发送给服务器)：
+公钥和私钥的关系，有人形象的把公钥比喻为保险箱，把私钥比喻为保险箱的钥匙，保险箱我可以给任何人，也可以有多个保险箱，任何人都可以往保险箱里面放东西(机密数据)，但只有我有私钥(保险箱的钥匙)，只有我能打开保险箱。
 
-客户端向服务器请求`RSA公钥`----->`服务器`----->返给客户端一个`NSString`格式的RSA公钥----->客户端用`RSA公钥字符串`加密`密码`发送给服务器----->服务器用RSA私钥解密并核对`密码`----->核对密码是否正确，并返回客户数据给客户端。
+### 常用场景
 
-![RSA序列图](https://raw.githubusercontent.com/muzipiao/GitHubImages/master/RSAImage/RSAImg2.png)
+最常见的场景就是客户端向服务端上送密码的场景，客户端先从服务端获取公钥，加密密码后上送。
+
+![常用场景](https://raw.githubusercontent.com/muzipiao/GitHubImages/master/RSAImage/RSAImg2.png)
+
+如下一个密码校验流程，iPhone 表示客户端， Server 表示服务端。
+
+```sequence
+iPhone->Server: 客户端向服务请求 RSA 公钥
+Note right of Server: 服务端保留 RSA 私钥
+Server-->iPhone: 服务端将 RSA 公钥发送给客户端
+Note left of iPhone: 客户端使用 RSA 公钥加密密码
+iPhone->Server: 客户端将加密后的密文发送给服务器
+Note right of Server: 服务端使用 RSA 私钥解密校验密码
+Server-->iPhone: 服务端将密码校验结果发送给客户端
+```
 
 ### 关于特殊字符网络传输转义的问题
 
-这是一串服务器生成的 RSA 公钥
+这是一串服务器生成的 RSA 公钥，可以看到由z数字字母及 `+/` 组成。
 
-> MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDTbZ6cNH9
-> PgdF60aQKveLz3FTalyzHQwbp601y77SzmGHX3F5NoVUZbd
-> K7UMdoCLK4FBziTewYD9DWvAErXZo9BFuI96bAop8wfl1Vk
-> ZyyHTcznxNJFGSQd/B70/ExMgMBpEwkAAdyUqIjIdVGh1FQ
-> K/4acwS39YXwbS+IlHsPSQIDAQAB
+        MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDTbZ6cNH9
+        PgdF60aQKveLz3FTalyzHQwbp601y77SzmGHX3F5NoVUZbd
+        K7UMdoCLK4FBziTewYD9DWvAErXZo9BFuI96bAop8wfl1Vk
+        ZyyHTcznxNJFGSQd/B70/ExMgMBpEwkAAdyUqIjIdVGh1FQ
+        K/4acwS39YXwbS+IlHsPSQIDAQAB
 
-但由于含有`/+=\n`等特殊字符串，网络传输过程中导致转义，进而导致加密解密不成功，解决办法是进行 URL 特殊符号编码解码(百分号转义)；具体示例，在 Demo 中有示例。
+由于含有`/+=\n`等特殊字符串，网络传输过程中导致转义，进而导致加解密不成功，解决办法是进行 URL 特殊符号编码解码（百分号转义），如下所示，将除字母数字外，全部进行 URLEncode 编码。
+
+```objc 
+/**
+ * self.gPubkey 是如上所示公钥
+ * alphanumericCharacterSet 表示字母数字字符集
+ */
+NSString *encodePubKey = [self.gPubkey stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.alphanumericCharacterSet];
+
+// 解码更简单，stringByRemovingPercentEncoding 即可 URLDecode
+NSString *decodePubKey = encodePubKey.stringByRemovingPercentEncoding;
+```
+
+编码后如下所示，除了字母数字外，其他符号都变成了 URLEncode 形式，解码后和原文相同。
+
+        MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDTbZ6cNH9
+        PgdF60aQKveLz3FTalyzHQwbp601y77SzmGHX3F5NoVUZbdK7U
+        MdoCLK4FBziTewYD9DWvAErXZo9BFuI96bAop8wfl1VkZyyHTczn
+        xNJFGSQd%2FB70%2FExMgMBpEwkAAdyUqIjIdVGh1FQK%2F4
+        acwS39YXwbS%2BIlHsPSQIDAQAB
 
 如果您觉得有所帮助，请在 [GitHub RSAObjC](https://github.com/muzipiao/RSAObjC) 上赏个Star ⭐️，您的鼓励是我前进的动力
