@@ -1,4 +1,5 @@
 [![CI Status](https://img.shields.io/travis/muzipiao/RSAObjC.svg?style=flat)](https://travis-ci.org/muzipiao/RSAObjC)
+[![codecov](https://codecov.io/gh/muzipiao/RSAObjC/branch/master/graph/badge.svg)](https://codecov.io/gh/muzipiao/RSAObjC)
 [![Version](https://img.shields.io/cocoapods/v/RSAObjC.svg?style=flat)](https://cocoapods.org/pods/RSAObjC)
 [![License](https://img.shields.io/cocoapods/l/RSAObjC.svg?style=flat)](https://cocoapods.org/pods/RSAObjC)
 [![Platform](https://img.shields.io/cocoapods/p/RSAObjC.svg?style=flat)](https://cocoapods.org/pods/RSAObjC)
