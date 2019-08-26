@@ -12,8 +12,8 @@
 static NSString *g1024Pubkey = @"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDTbZ6cNH9PgdF60aQKveLz3FTalyzHQwbp601y77SzmGHX3F5NoVUZbdK7UMdoCLK4FBziTewYD9DWvAErXZo9BFuI96bAop8wfl1VkZyyHTcznxNJFGSQd/B70/ExMgMBpEwkAAdyUqIjIdVGh1FQK/4acwS39YXwbS+IlHsPSQIDAQAB";
 static NSString *g1024Privkey = @"MIICeAIBADANBgkqhkiG9w0BAQEFAASCAmIwggJeAgEAAoGBANNtnpw0f0+B0XrRpAq94vPcVNqXLMdDBunrTXLvtLOYYdfcXk2hVRlt0rtQx2gIsrgUHOJN7BgP0Na8AStdmj0EW4j3psCinzB+XVWRnLIdNzOfE0kUZJB38HvT8TEyAwGkTCQAB3JSoiMh1UaHUVAr/hpzBLf1hfBtL4iUew9JAgMBAAECgYA1tGeQmAkqofga8XtwuxEWDoaDS9k0+EKeUoXGxzqoT/GyiihuIafjILFhoUA1ndf/yCQaG973sbTDhtfpMwqFNQq13+JAownslTjWgr7Hwf7qplYW92R7CU0v7wFfjqm1t/2FKU9JkHfaHfb7qqESMIbO/VMjER9o4tEx58uXDQJBAO0O4lnWDVjr1gN02cqvxPOtTY6DgFbQDeaAZF8obb6XqvCqGW/AVms3Bh8nVlUwdQ2K/xte8tHxjW9FtBQTLd8CQQDkUncO35gAqUF9Bhsdzrs7nO1J3VjLrM0ITrepqjqtVEvdXZc+1/UrkWVaIigWAXjQCVfmQzScdbznhYXPz5fXAkEAgB3KMRkhL4yNpmKRjhw+ih+ASeRCCSj6Sjfbhx4XaakYZmbXxnChg+JB+bZNz06YBFC5nLZM7y/n61o1f5/56wJBALw+ZVzE6ly5L34114uG04W9x0HcFgau7MiJphFjgUdAtd/H9xfgE4odMRPUD3q9Me9LlMYK6MiKpfm4c2+3dzcCQQC8y37NPgpNEkd9smMwPpSEjPW41aMlfcKvP4Da3z7G5bGlmuICrva9YDAiaAyDGGCK8LxC8K6HpKrFgYrXkRtt";
 
-static NSString *g2048Pubkey = @"MIIBITANBgkqhkiG9w0BAQEFAAOCAQ4AMIIBCQKCAQBsYOUwYo7Zxq9RhLnGYTZe2USBP5GCmt4pnDHawEDMVL7KyCM7rzpTL+5Q5B7/6ou50cBfEeuKqImDBC7rg7GGDVuMnb4XTlnWMBCotpT1yO37K9PmiLdZivz2o4vZF2DtFjJGOnA1zna7VSOycIuzO6FNmgQbx5/FkvYzn9OJfRxjcY/YGJ5axpJ2acDp+jNluxWJE2T8r3WKbAXIkgSLW/JcwrS9XgbzCoE+WDMgEy4GMZDbKrfZPu66+zrJLfH1TSWI3Vp96e46L/qyLDTn6ki+JnCeW77jZY/Qvx95QnZ9l/mtRlhl1k/NOnZYKxA8Gxwyhycqw031+L7Lg8lNAgMBAAE=";
-static NSString *g2048Privkey = @"MIIEoQIBAAKCAQBsYOUwYo7Zxq9RhLnGYTZe2USBP5GCmt4pnDHawEDMVL7KyCM7rzpTL+5Q5B7/6ou50cBfEeuKqImDBC7rg7GGDVuMnb4XTlnWMBCotpT1yO37K9PmiLdZivz2o4vZF2DtFjJGOnA1zna7VSOycIuzO6FNmgQbx5/FkvYzn9OJfRxjcY/YGJ5axpJ2acDp+jNluxWJE2T8r3WKbAXIkgSLW/JcwrS9XgbzCoE+WDMgEy4GMZDbKrfZPu66+zrJLfH1TSWI3Vp96e46L/qyLDTn6ki+JnCeW77jZY/Qvx95QnZ9l/mtRlhl1kNOnZYKxA8Gxwyhycqw031+L7Lg8lNAgMBAAECggEAW8gvMCu3SGy/mmypm3xGPEsJfd+kzhNzY4+4lMXN2n1GWprlY61A2qQz0eNu8VHjZMlifeDCNdoHIqJPTfpoQ9taFZqdGkWrRP3NjeOaARBZoiV6vbg4dieDlSfpzj7DQeVTTDA/SQIBgSJYKcywMmikcQCmzBPhlcOgpxWKYtsp994Ev5UrPQHBBFDs11V8VU6+Bzl7ljOez7Si1ERqHldIYJ/AKJeHxQb+Cq2fdIsbw9s169yrYZgWGdmlSfe+hQ2fj6AlnsrVcJjNDIXRsbQmu24EkcBEWT2o2BBP4L/q+EopbeHscHWvexpOZzhUkMleDpRXTMpjtZ8lfL7MwQKBgQC8pt+ZbuD1rP4zydp/VJ5T0N7FDlI2W+nOhdZC03Wn4Y5VS4ruBEOoSDj4Ci+MXPttRamijoNa1VGWxiQBnNx3FSVftFlq9lN8Aiid1rxfOk49jRjdfdUtaO5Ui70TaqqU+wOQbjbcERRPd/FP3UMkU0zSHDd6ev53MuwT90MuEQKBgQCTEb2W8VVjMePjWAtjSmUAyutKKkSq83NiHnpJb6tPy6OLQQyZcLX2a+jIZG4y0h4oh4/OM1QIQkbyrxrkou8WfnrSucJqdVyKFjMJKU0z60CJ0ROgWP41JaQrxwCP5+eCHzwFw1nPe+deIBObEY6XdnFtEsycLq8gHDzuq7KbfQKBgE8qf/61RvYR6IL3HBf+/IoTxshO4DUrkQw3odhdQKx4vPASSXTkmTfPRwjfzWBLzL7oUu2CfKDrj9eDwqxilSnr18k3t6ZpRFNv3HeQG3Ci2R5/TYX1PjZWKF2WXnv9cSQfyjkb5y2mhS1sGfn30is2QbCSYr2lS4/d8K/YPXrhAoGAVsKSe+dnHhuies3H+g07RJpw79G7rLXuDaY5MfVktLBHjLEVQ7fQQM0sCHvm3qhCDlrapSR2oGCpBiXy0YqlTTnUL1hSrwcJTpUGCpOI7eYMrsDeuSuG28eW8BR36m0+j+7pM+UoqFRKC6cUqdhTrFq9U0FR35lSyrid4Zb8yOkCgYA5Iftu+sbi4qyIszSotHPHpoe+kXml0dyQjFoblsDkuv8LuyjVYDo3HewDJd/5m44u8pbK4kbYd9tBTI0EIaT6LuYPXk24f7ywwC7bo8ZIzVVbW+EuvqFnbwcBKxUMdbsa/G3DRgZn8Zg0fQAzoQfIoNyPAP2pjG8h38JDKvmUJA==";
+static NSString *g2048Pubkey = @"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwrdbN5s9g+xH0s4HeKWQjdFqc0q0tNToKilzGGm/fL/wtbhXRKSdcWsS1OVr7U6fzlMwgerPIbXJQsgrAZTgMzryaHGTOnH5gTNeB6gcSNYCr0E57w9RnX9010NkJPzHGl375QiqyVs20d5rk3dcQTCPopDqF72cu6Vysbi9ShOeu1HaLC4Yrh8LX5Qo2ytLMMEIXR6/y6yc9X1PZ3INfUqMkleukILif6g1v/KaChXBWUtPkAUiRojPpU+E0YfZSTP/3+iCmUhFimoGnDCyP9OUe1MC3hSVCtg0cSV0oT5BZZvo5rOZzbzMtmLVhjKClgwGzAONZ+VlRLhSUtLiBwIDAQAB";
+static NSString *g2048Privkey = @"MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDCt1s3mz2D7EfSzgd4pZCN0WpzSrS01OgqKXMYab98v/C1uFdEpJ1xaxLU5WvtTp/OUzCB6s8htclCyCsBlOAzOvJocZM6cfmBM14HqBxI1gKvQTnvD1Gdf3TXQ2Qk/McaXfvlCKrJWzbR3muTd1xBMI+ikOoXvZy7pXKxuL1KE567UdosLhiuHwtflCjbK0swwQhdHr/LrJz1fU9ncg19SoySV66QguJ/qDW/8poKFcFZS0+QBSJGiM+lT4TRh9lJM//f6IKZSEWKagacMLI/05R7UwLeFJUK2DRxJXShPkFlm+jms5nNvMy2YtWGMoKWDAbMA41n5WVEuFJS0uIHAgMBAAECggEATtHsMdE8kId394SBD7xtjIrl/W+TQNQieta2iX5dDkGgTd8mLFo6hWvjfpy0GKbIF7wjGaQUXr/4jXj7t7MtIm/NKqw2/eSfLEa/3HeXo4BGK+1KZ1QbJJcwk+bqxfIxIqJC0k6027d5tHDFuTcK+DSRICxrJlsR8/+gMwLmVPJxDZdicw9O1S3p3DQfaXEL1IpHgqIVZkAMZDy+WuOKKmQUhc/HwkT3ZBPodNgig1GOiAyduOe/Ema8SuaYsBI3SNetuPUx6uiCI0xQVnC2ocgEa7pUg9Lg9m4GPym7JUOrtGHdnb+D94BTO3cA062ev2rLVKn+Q5LJDCc2P8xf+QKBgQDvjGYfLWeNBg6dv+2+g5OLdgG8E4Zfkgx1FDGCKZXjOkkqHlkijMWZOnjZdBik9UM1eMcnTrxDaYlQDSjBNDBHYM6BusvE0O4F61cpnK2znllpK+z8+cx1kRaCg6+mQ1DeF5mkgmB/TNiZa+24dG8x8FIKXDyrOpUFuT9KVJzRMwKBgQDQFr5qHaXOA3q1/wJ87pHDcGJ8Tkn4hmK1jlDmmGLO9ypFjY3DlmFzwgqFo3TVXh8tUn+a0AelzW9LZHBqXd3TDZtEBxK8VYtnfJS0gAv5Ha7zpI+BVyFLTVaw+ucQI925/4fyMs9lW2E3X++JuEGvVzXag1puDid7H+Tkm2aT3QKBgQDqAdg8+qjejZ03oydHZdd7dDLrnJM2x0BeGvTmN2ORzv1sJKtkYeoh7onhu1TbyC/4i1zZXEPzAqS9y60VV7sV706sUmL+iC8NH0JNhx30imrDn8JpukhuTOaVZrjvDXFxE9Lmbup/UP2CmnlmKG/7c81hC4vEpXywU6+tGAz9GwKBgFUFRe2jiXBAGa4ssD6NVz8sNwElF7IUblZR/JoLHywC7uGWMZr9YXnjiVsK6xyWpVRmRb7iSo2i/1slgYzkJ1MpVwwXe785kIjK7RNG0h2J1Ea2MPAewnq68bXD/g6pKNnrHweFXRnDmVf/uaZig2v5zQYn7xXScK0s3d/N4r59AoGAWIuKd/S1GPmlD8YUba6PZRTQXZqBhdGukawibWwqOla9lki2vXeYslnK70iiEkTH4q7nWswwZylpCdzBi6QkqrMFPf159ChkL0lC5L6pIxPOUMhrlGzKEidIAgqpY40fLzInCrqrnPUyqMAw+HGLxlH7SxtK9BA98KSu06Eec1o=";
 
 @interface Tests : XCTestCase
 
@@ -116,7 +116,7 @@ static NSString *g2048Privkey = @"MIIEoQIBAAKCAQBsYOUwYo7Zxq9RhLnGYTZe2USBP5GCmt
         
         NSString *deStr1024 = [RSAObjC decrypt:enStr1024 PrivateKey:g1024Privkey];
         XCTAssertNotNil(deStr1024, @"解密结果不为空");
-        NSString *deStr2048 = [RSAObjC decrypt:enStr2048 PrivateKey:g1024Privkey];
+        NSString *deStr2048 = [RSAObjC decrypt:enStr2048 PrivateKey:g2048Privkey];
         XCTAssertNotNil(deStr2048, @"解密结果不为空");
         
         BOOL isSame1024 = [deStr1024 isEqualToString:plaintext];
@@ -130,14 +130,46 @@ static NSString *g2048Privkey = @"MIIEoQIBAAKCAQBsYOUwYo7Zxq9RhLnGYTZe2USBP5GCmt
  * 测试标准 der 公钥，p12 私钥加解密
  */
 - (void)testStandardRSAFile {
-    
+    for (NSInteger i = 0; i < 1000; i++) {
+        int randLen = arc4random_uniform((int)1000);
+        NSString *plaintext = [self randomZhEnString:randLen];
+        XCTAssertNotNil(plaintext, @"生成字符串不为空");
+        
+        NSString *enStrWithDer = [RSAObjC encrypt:plaintext KeyFilePath:self.derPubKey];
+        XCTAssertNotNil(enStrWithDer, @"加密字符串不为空");
+        
+        NSString *deStrWithP12 = [RSAObjC decrypt:enStrWithDer KeyFilePath:self.p12PricKey FilePwd:nil];
+        XCTAssertNotNil(deStrWithP12, @"解密结果不为空");
+        
+        BOOL isSameText = [deStrWithP12 isEqualToString:plaintext];
+        XCTAssertTrue(isSameText, @"加解密结果应该相同");
+    }
 }
 
 /**
  * 测试标准 Pem 文本格式公私钥加解密
  */
 - (void)testPemRSAFile {
-    
+    for (NSInteger i = 0; i < 1000; i++) {
+        int randLen = arc4random_uniform((int)1000);
+        NSString *plaintext = [self randomZhEnString:randLen];
+        XCTAssertNotNil(plaintext, @"生成字符串不为空");
+        
+        NSString *enStr1024 = [RSAObjC encrypt:plaintext KeyFilePath:self.g1024PubKeyPath];
+        XCTAssertNotNil(enStr1024, @"加密字符串不为空");
+        NSString *enStr2048 = [RSAObjC encrypt:plaintext KeyFilePath:self.g2048PubKeyPath];
+        XCTAssertNotNil(enStr2048, @"加密字符串不为空");
+        
+        NSString *deStr1024 = [RSAObjC decrypt:enStr1024 KeyFilePath:self.g1024PrivKeyPath FilePwd:nil];
+        XCTAssertNotNil(deStr1024, @"解密结果不为空");
+        NSString *deStr2048 = [RSAObjC decrypt:enStr2048 KeyFilePath:self.g2048PrivKeyPath FilePwd:nil];
+        XCTAssertNotNil(deStr2048, @"解密结果不为空");
+        
+        BOOL isSame1024 = [deStr1024 isEqualToString:plaintext];
+        XCTAssertTrue(isSame1024, @"加解密结果应该相同");
+        BOOL isSame2048 = [deStr2048 isEqualToString:plaintext];
+        XCTAssertTrue(isSame2048, @"加解密结果应该相同");
+    }
 }
 
 ///MARK: - 生成随机字符串

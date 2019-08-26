@@ -4,7 +4,7 @@ Pod::Spec.new do |s|
   s.summary          = 'iOS 端使用 RSA 加密解密。'
 
   s.description      = <<-DESC
- 基于 ObjC 封装 RSA 加密解密，生成公私钥工具类，方便 iOS 端使用。
+ 基于 ObjC 封装 RSA 加密解密，可使用字符串、PEM、DER、P12等格式公私钥进行加解密，方便客户端直接使用。
                        DESC
 
   s.homepage         = 'https://github.com/muzipiao/RSAObjC'

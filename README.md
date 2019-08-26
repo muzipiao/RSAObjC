@@ -112,4 +112,20 @@ xNJFGSQd%2FB70%2FExMgMBpEwkAAdyUqIjIdVGh1FQK%2F4
 acwS39YXwbS%2BIlHsPSQIDAQAB
 ```
 
+### OpenSSL 生成公私钥
+
+在 Mac 上使用 OpenSSL 生成公私钥测试，位数可选 1024、2048、4096 等，位数越大，生成的公私钥越长，安全性越高，但加解密速度也会越慢。注意，如果传入 PEM 格式公私钥，私钥必须为 PKCS8 格式。
+
+```ruby
+# 生成 2048 位 RSA 私钥
+openssl genrsa -out rsa_private_key.pem 2048
+
+# 生成成对的 2048 位 RSA 公钥
+openssl rsa -in rsa_private_key.pem -pubout -out rsa_public_key.pem
+
+# 将 RSA 私钥转换为 PKCS8 格式
+openssl pkcs8 -topk8 -inform PEM -in rsa_private_key.pem -outform PEM -nocrypt > rsa_private_key_pkcs8.pem
+```
+然后就可以使用公钥文件 rsa_public_key.pem 和私钥文件 rsa_private_key_pkcs8.pem 进行加解密了。
+
 如果您觉得有所帮助，请在 [GitHub RSAObjC](https://github.com/muzipiao/RSAObjC) 上赏个Star ⭐️，您的鼓励是我前进的动力
