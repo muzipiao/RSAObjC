@@ -20,6 +20,8 @@
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		914BF1982157DDF3A0C170F2 /* Pods_RSAObjC_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6C577131E32C50D5CE59E76 /* Pods_RSAObjC_Example.framework */; };
+		9CB934D52418BE9F00DBFB14 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9CB934D42418BE9F00DBFB14 /* LaunchScreen.storyboard */; };
+		9CB934D92418BF5B00DBFB14 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CB934D82418BF5B00DBFB14 /* Default-568h@2x.png */; };
 		AB2FEDFF23104E3F00282D94 /* RSATests.m in Sources */ = {isa = PBXBuildFile; fileRef = AB2FEDFD23104E3200282D94 /* RSATests.m */; };
 		ABE2A0F02312DCD500914299 /* rsa_1024_public_key.pem in Resources */ = {isa = PBXBuildFile; fileRef = ABE2A0EC2312DCD500914299 /* rsa_1024_public_key.pem */; };
 		ABE2A0F12312DCD500914299 /* rsa_2048_public_key.pem in Resources */ = {isa = PBXBuildFile; fileRef = ABE2A0ED2312DCD500914299 /* rsa_2048_public_key.pem */; };
@@ -70,6 +72,8 @@
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		62CAE607BD1F49032689A924 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		9CB934D42418BE9F00DBFB14 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		9CB934D82418BF5B00DBFB14 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		A551A83277E4594CF6AC0CCB /* Pods-RSAObjC_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RSAObjC_Tests.debug.xcconfig"; path = "Target Support Files/Pods-RSAObjC_Tests/Pods-RSAObjC_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		A6C577131E32C50D5CE59E76 /* Pods_RSAObjC_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RSAObjC_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB2FEDFD23104E3200282D94 /* RSATests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSATests.m; sourceTree = "<group>"; };
@@ -151,6 +155,8 @@
 				6003F59D195388D20070C39A /* RSAAppDelegate.m */,
 				6003F5A5195388D20070C39A /* RSAViewController.h */,
 				6003F5A6195388D20070C39A /* RSAViewController.m */,
+				9CB934D42418BE9F00DBFB14 /* LaunchScreen.storyboard */,
+				9CB934D82418BF5B00DBFB14 /* Default-568h@2x.png */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
@@ -307,8 +313,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9CB934D52418BE9F00DBFB14 /* LaunchScreen.storyboard in Resources */,
 				ABE2A0F92312EF5000914299 /* rsa_1024_public_key.der in Resources */,
 				ABE2A0F02312DCD500914299 /* rsa_1024_public_key.pem in Resources */,
+				9CB934D92418BF5B00DBFB14 /* Default-568h@2x.png in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				ABE2A1042313009700914299 /* rsa_2048_private_key_pkcs8.pem in Resources */,
 				ABE2A1072313020000914299 /* rsa_1024_private_key_pkcs8.pem in Resources */,
@@ -572,7 +580,7 @@
 			baseConfigurationReference = 4C37683B943504ECF7833F3F /* Pods-RSAObjC_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 5876MU3PLA;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -594,7 +602,7 @@
 			baseConfigurationReference = 353A565995BEB6847E25D22F /* Pods-RSAObjC_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 5876MU3PLA;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
