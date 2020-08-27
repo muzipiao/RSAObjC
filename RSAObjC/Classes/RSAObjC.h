@@ -1,10 +1,9 @@
 //
-//  RSAEncryptor.h
-//  RSATEST
+//  RSAObjC.h
 //
 //  Created by PacteraLF on 16/10/17.
 //  Copyright © 2016年 PacteraLF. All rights reserved.
-// RSA 加密封装类
+//  RSA 加密封装类
 
 #import <Foundation/Foundation.h>
 

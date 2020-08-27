@@ -1,10 +1,9 @@
 //
-//  RSAEncryptor.m
-//  RSATEST
+//  RSAObjC.m
 //
 //  Created by PacteraLF on 16/10/17.
 //  Copyright © 2016年 PacteraLF. All rights reserved.
-//
+//  RSA 加密封装类
 
 #import "RSAObjC.h"
 #import <Security/Security.h>
@@ -53,7 +52,9 @@ static NSData *base64_decode(NSString *str){
         NSData *data = [self encryptData:[plaintext dataUsingEncoding:NSUTF8StringEncoding] publicKey:pubKey];
         result = base64_encode_data(data);
     }else{
-        result = [self encryptString:plaintext publicKeyRef:[self getPublicKeyRefWithContentsOfFile:path]];
+        SecKeyRef pubKeyRef = [self getPublicKeyRefWithContentsOfFile:path];
+        result = [self encryptString:plaintext publicKeyRef:pubKeyRef];
+        if (pubKeyRef) CFRelease(pubKeyRef);
     }
     return result;
 }
@@ -68,11 +69,12 @@ static NSData *base64_decode(NSString *str){
     if (ciphertext.length == 0 || privKey.length == 0) {
         return nil;
     }
+    
     NSData *data = [[NSData alloc] initWithBase64EncodedString:ciphertext options:NSDataBase64DecodingIgnoreUnknownCharacters];
     data = [self decryptData:data privateKey:privKey];
     NSString *ret = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    return ret;
     
+    return ret;
 }
 
 /**
@@ -139,7 +141,7 @@ static NSData *base64_decode(NSString *str){
 + (SecKeyRef)getPublicKeyRefWithContentsOfFile:(NSString *)filePath{
     NSData *certData = [NSData dataWithContentsOfFile:filePath];
     if (!certData) {
-        return nil;
+        return NULL;
     }
     SecCertificateRef cert = SecCertificateCreateWithData(NULL, (CFDataRef)certData);
     SecKeyRef key = NULL;
@@ -163,10 +165,10 @@ static NSData *base64_decode(NSString *str){
 }
 
 + (NSString *)encryptString:(NSString *)str publicKeyRef:(SecKeyRef)publicKeyRef{
-    if(![str dataUsingEncoding:NSUTF8StringEncoding]){
+    if(!publicKeyRef){
         return nil;
     }
-    if(!publicKeyRef){
+    if(![str dataUsingEncoding:NSUTF8StringEncoding]){
         return nil;
     }
     NSData *data = [self encryptData:[str dataUsingEncoding:NSUTF8StringEncoding] withKeyRef:publicKeyRef];
@@ -177,22 +179,27 @@ static NSData *base64_decode(NSString *str){
 + (SecKeyRef)getPrivateKeyRefWithContentsOfFile:(NSString *)filePath password:(NSString*)password{
     NSData *p12Data = [NSData dataWithContentsOfFile:filePath];
     if (!p12Data) {
-        return nil;
+        return NULL;
     }
+    
     SecKeyRef privateKeyRef = NULL;
-    NSMutableDictionary * options = [[NSMutableDictionary alloc] init];
-    [options setObject: password forKey:(__bridge id)kSecImportExportPassphrase];
-    CFArrayRef items = CFArrayCreate(NULL, 0, 0, NULL);
-    OSStatus securityError = SecPKCS12Import((__bridge CFDataRef) p12Data, (__bridge CFDictionaryRef)options, &items);
-    if (securityError == noErr && CFArrayGetCount(items) > 0) {
-        CFDictionaryRef identityDict = CFArrayGetValueAtIndex(items, 0);
-        SecIdentityRef identityApp = (SecIdentityRef)CFDictionaryGetValue(identityDict, kSecImportItemIdentity);
-        securityError = SecIdentityCopyPrivateKey(identityApp, &privateKeyRef);
-        if (securityError != noErr) {
-            privateKeyRef = NULL;
-        }
+    CFArrayRef rawItems = NULL;
+    NSDictionary *options = @{(id)kSecImportExportPassphrase:password};
+    
+    OSStatus securityError = SecPKCS12Import((__bridge CFDataRef)p12Data, (__bridge CFDictionaryRef)options, &rawItems);
+    if (securityError != errSecSuccess) {
+        if (rawItems) CFRelease(rawItems);
+        return NULL;
     }
-    CFRelease(items);
+    
+    NSArray *items = (NSArray*)CFBridgingRelease(rawItems);
+    if (items.count > 0) {
+        NSDictionary *firstItem = items[0];
+        SecIdentityRef identity = (SecIdentityRef)CFBridgingRetain(firstItem[(id)kSecImportItemIdentity]);
+        securityError = SecIdentityCopyPrivateKey(identity, &privateKeyRef);
+        if (identity) CFRelease(identity);
+        if (securityError != errSecSuccess) privateKeyRef = NULL;
+    }
     
     return privateKeyRef;
 }
@@ -212,10 +219,10 @@ static NSData *base64_decode(NSString *str){
         return nil;
     }
     SecKeyRef keyRef = [self addPublicKey:pubKey];
-    if(!keyRef){
-        return nil;
-    }
-    return [self encryptData:data withKeyRef:keyRef];
+    NSData *enData = [self encryptData:data withKeyRef:keyRef];
+    if (keyRef) CFRelease(keyRef);
+    
+    return enData;
 }
 
 + (SecKeyRef)addPublicKey:(NSString *)key{
@@ -313,7 +320,10 @@ static NSData *base64_decode(NSString *str){
     return ([NSData dataWithBytes:&c_key[idx] length:len - idx]);
 }
 
-+ (NSData *)encryptData:(NSData *)data withKeyRef:(SecKeyRef) keyRef{
++ (NSData *)encryptData:(NSData *)data withKeyRef:(SecKeyRef)keyRef{
+    if(!keyRef){
+        return nil;
+    }
     const uint8_t *srcbuf = (const uint8_t *)[data bytes];
     size_t srclen = (size_t)data.length;
     
@@ -348,7 +358,6 @@ static NSData *base64_decode(NSString *str){
     }
     
     free(outbuf);
-    CFRelease(keyRef);
     return ret;
 }
 
@@ -357,10 +366,10 @@ static NSData *base64_decode(NSString *str){
         return nil;
     }
     SecKeyRef keyRef = [self addPrivateKey:privKey];
-    if(!keyRef){
-        return nil;
-    }
-    return [self decryptData:data withKeyRef:keyRef];
+    NSData *deData = [self decryptData:data withKeyRef:keyRef];
+    if (keyRef) CFRelease(keyRef);
+    
+    return deData;
 }
 
 + (SecKeyRef)addPrivateKey:(NSString *)key{
@@ -381,7 +390,7 @@ static NSData *base64_decode(NSString *str){
     NSData *data = base64_decode(key);
     data = [self stripPrivateKeyHeader:data];
     if(!data){
-        return nil;
+        return NULL;
     }
     
     //a tag to read/write keychain storage
@@ -402,13 +411,12 @@ static NSData *base64_decode(NSString *str){
     [privateKey setObject:[NSNumber numberWithBool:YES] forKey:(__bridge id)
      kSecReturnPersistentRef];
     
-    CFTypeRef persistKey = nil;
+    CFTypeRef persistKey = NULL;
     OSStatus status = SecItemAdd((__bridge CFDictionaryRef)privateKey, &persistKey);
-    if (persistKey != nil){
-        CFRelease(persistKey);
-    }
+    if (persistKey) CFRelease(persistKey);
+    
     if ((status != noErr) && (status != errSecDuplicateItem)) {
-        return nil;
+        return NULL;
     }
     
     [privateKey removeObjectForKey:(__bridge id)kSecValueData];
@@ -420,7 +428,7 @@ static NSData *base64_decode(NSString *str){
     SecKeyRef keyRef = nil;
     status = SecItemCopyMatching((__bridge CFDictionaryRef)privateKey, (CFTypeRef *)&keyRef);
     if(status != noErr){
-        return nil;
+        return NULL;
     }
     return keyRef;
 }
@@ -462,7 +470,10 @@ static NSData *base64_decode(NSString *str){
     return [d_key subdataWithRange:NSMakeRange(idx, c_len)];
 }
 
-+ (NSData *)decryptData:(NSData *)data withKeyRef:(SecKeyRef) keyRef{
++ (NSData *)decryptData:(NSData *)data withKeyRef:(SecKeyRef)keyRef{
+    if(!keyRef){
+        return nil;
+    }
     const uint8_t *srcbuf = (const uint8_t *)[data bytes];
     size_t srclen = (size_t)data.length;
     
@@ -472,7 +483,6 @@ static NSData *base64_decode(NSString *str){
     
     NSMutableData *ret = [[NSMutableData alloc] init];
     for(int idx=0; idx<srclen; idx+=src_block_size){
-        //NSLog(@"%d/%d block_size: %d", idx, (int)srclen, (int)block_size);
         size_t data_len = srclen - idx;
         if(data_len > src_block_size){
             data_len = src_block_size;
@@ -511,7 +521,6 @@ static NSData *base64_decode(NSString *str){
     }
     
     free(outbuf);
-    CFRelease(keyRef);
     return ret;
 }
 

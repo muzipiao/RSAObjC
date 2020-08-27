@@ -26,11 +26,17 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.gTextView = [[UITextView alloc]initWithFrame:self.view.bounds];
     self.gTextView.editable = NO;
+    self.gTextView.userInteractionEnabled = NO;
     self.gTextView.font = [UIFont systemFontOfSize:11];
     [self.view addSubview:self.gTextView];
     self.gPwd = @"123456";  // 测试用密码
     [self initValues]; // 初始化公私钥
     [self testRSAEncrypt];    // 测试 RSA 加解密
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    self.gTextView.text = @"";
+    [self testRSAEncrypt];
 }
 
 - (void)testRSAEncrypt{
